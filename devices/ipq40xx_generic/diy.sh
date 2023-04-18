@@ -4,11 +4,12 @@ shopt -s extglob
 
 SHELL_FOLDER=$(dirname $(readlink -f "$0"))
 
-sed -i 's/DEFAULT_PACKAGES +=/DEFAULT_PACKAGES += autocore-arm luci-app-cpufreq/' target/ipq40xx/Makefile
+bash $SHELL_FOLDER/../common/kernel_5.15.sh
 
-echo '
-CONFIG_CPU_FREQ_GOV_USERSPACE=y
-CONFIG_CPU_FREQ_GOV_ONDEMAND=y
-CONFIG_CPU_FREQ_GOV_CONSERVATIVE=y
-' >> ./target/linux/ipq40xx/config-5.10
+
+
+svn export --force https://github.com/openwrt/openwrt/trunk/package/firmware/ipq-wifi package/firmware/ipq-wifi
+
+#sh -c "curl -sfL https://patch-diff.githubusercontent.com/raw/openwrt/openwrt/pull/10778.patch | git apply -p1"
+
 

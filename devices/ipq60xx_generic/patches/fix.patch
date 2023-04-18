@@ -52,28 +52,6 @@
  $(eval $(call BuildPlugin,iptables-mod-tee,$(IPT_TEE-m)))
  $(eval $(call BuildPlugin,iptables-mod-u32,$(IPT_U32-m)))
 
---- a/feeds/kiddin9/firewall/Makefile
-+++ b/feeds/kiddin9/firewall/Makefile
-@@ -28,7 +28,7 @@ define Package/firewall
-   SECTION:=net
-   CATEGORY:=Base system
-   TITLE:=OpenWrt C Firewall
--  DEPENDS:=+libubox +libubus +libuci +libip4tc +IPV6:libip6tc +libiptext +IPV6:libiptext6 +libxtables +kmod-ipt-core +kmod-ipt-conntrack +IPV6:kmod-nf-conntrack6 +iptables-mod-fullconenat +ip6tables-mod-fullconenat +iptables +ip6tables +kmod-ipt-offload
-+  DEPENDS:=+libubox +libubus +libuci +libip4tc +IPV6:libip6tc +libiptext +IPV6:libiptext6 +libxtables +kmod-ipt-core +kmod-ipt-conntrack +IPV6:kmod-nf-conntrack6 +iptables-mod-fullconenat +iptables +ip6tables +kmod-ipt-offload
-   PROVIDES:=uci-firewall
- endef
-
---- a/feeds/kiddin9/automount/Makefile
-+++ b/feeds/kiddin9/automount/Makefile
-@@ -17,7 +17,7 @@ include $(INCLUDE_DIR)/package.mk
- define Package/automount
-   TITLE:=Mount autoconfig hotplug script.
-   MAINTAINER:=Lean
--  DEPENDS:=+block-mount +kmod-fs-exfat +kmod-fs-ext4 +kmod-fs-vfat +libblkid \
-+  DEPENDS:=+block-mount +kmod-fs-ext4 +kmod-fs-vfat +libblkid \
- 	+kmod-usb-storage +kmod-usb-storage-extras +!TARGET_ramips:kmod-usb-storage-uas +ntfs3-mount
- endef
-
 --- a/include/target.mk
 +++ b/include/target.mk
 @@ -147,10 +147,17 @@ ifneq ($(TARGET_BUILD)$(if $(DUMP),,1),)
@@ -133,12 +111,12 @@
 
 --- a/target/linux/ipq60xx/image/Makefile
 +++ b/target/linux/ipq60xx/image/Makefile
-@@ -102,7 +102,7 @@ define Device/qihoo_v6
+@@ -104,7 +104,7 @@ define Device/qihoo_v6
  	PAGESIZE := 2048
  	DEVICE_DTS := qcom-ipq6018-qihoo-v6
  	DEVICE_DTS_CONFIG := config@cp03-c1
 -	DEVICE_TITLE := Qihoo V6
 +	DEVICE_TITLE := Qihoo 360 V6
- 	DEVICE_PACKAGES := kmod-usb3 kmod-usb-phy-msm
+ 	DEVICE_PACKAGES := ath11k-wifi-qihoo-v6 kmod-usb3 kmod-usb-phy-msm
  endef
  TARGET_DEVICES += qihoo_v6
